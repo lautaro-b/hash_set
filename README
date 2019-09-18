@@ -1,0 +1,132 @@
+lautaro
+
+yoav, carlah, harold
+
+=============================
+=      File description     =
+=============================
+
+ClosedHashSet.java - Closed Hash set class
+CollectionFacadeSet.java - Facade class for Collection<String>
+OpenHashSet.java - Open Hash set Class
+SimpleHashSet.java - Hash set infra class
+SimpleSetPerformanceAnalyzer.java - Performance Analyzer (main) class
+LinkedListString.java - 
+README - this file
+RESULTS - results for given tests
+
+
+
+
+
+
+
+
+
+============================
+= Implementation details = 
+============================
+
+
+OpenHashSets table: I implemented the table in OpenHashSet as an array of LinkedListString objects. 
+in order to find a specific objetc (String) i just calculated its hash code and fitted it to the list (with the
+clamp() function) and inserted, if it was possible acording to the load factor, the string into the corresponding
+linked list.
+
+
+
+ClosedHashSet:  I used quadratic probing in order to find the matching place for a given string according
+to its hash code. It means going through the places in the table until we find null (which means, if we
+are searching, that there is no sense in keep searching), and if we find the string "wasDeleted" and there
+is a strong equality (==), we can insert/add the string there if that is what we want. I set that string
+where there was a deleted object in order to distinguish it from null. 
+
+
+
+
+
+
+=============================
+=    Answers to questions   =
+=============================
+
+
+	Test results:
+#These values correspond to the time it takes (in ms) to insert data1 to all data structures
+OpenHashSet_AddData1 = 38658
+ClosedHashSet_AddData1 = 15732
+TreeSet_AddData1 = 56
+LinkedList_AddData1 = 38422
+HashSet_AddData1 = 67
+
+#These values correspond to the time it takes (in ms) to insert data2 to all data structures
+OpenHashSet_AddData2 = 43
+ClosedHashSet_AddData2 = 7
+TreeSet_AddData2 = 36
+LinkedList_AddData2 = 116601
+HashSet_AddData2 = 12
+
+#These values correspond to the time it takes (in ns) to check if "hi" is contained in
+#the data structures initialized with data1
+OpenHashSet_Contains_hi1 = 181
+ClosedHashSet_Contains_hi1 = 144
+TreeSet_Contains_hi1 = 132
+LinkedList_Contains_hi1 = 1475250
+HashSet_Contains_hi1 = 31
+
+#These values correspond to the time it takes (in ns) to check if "-13170890158" is contained in
+#the data structures initialized with data1
+OpenHashSet_Contains_negative = 467270
+ClosedHashSet_Contains_negative = 161
+TreeSet_Contains_negative = 143
+LinkedList_Contains_negative = 1523931
+HashSet_Contains_negative = 27
+
+#These values correspond to the time it takes (in ns) to check if "23" is contained in
+#the data structures initialized with data2
+OpenHashSet_Contains_23 = 121
+ClosedHashSet_Contains_23 = 110
+TreeSet_Contains_23 = 79
+LinkedList_Contains_23 = 829522
+HashSet_Contains_23 = 14
+
+#These values correspond to the time it takes (in ns) to check if "hi" is contained in
+#the data structures initialized with data2
+OpenHashSet_Contains_hi2 = 98
+ClosedHashSet_Contains_hi2 = 92
+TreeSet_Contains_hi2 = 83
+LinkedList_Contains_hi2 = 1476082
+HashSet_Contains_hi2 = 11
+
+*   data1 contains several strings with the same hashcode, therefore searching a specific word in the set takes
+	more than linked list complexity (because in linked list we just need to search whereas at open hash
+	set modeling we need to perform some other operations in addition to it, like contains() and hashCode()). This also 
+	represents
+	a problem for closed hash set modeling since using it we need to go through all the array with additional actions 
+	like finding the next index, etcetera.
+
+*	HashSet:
+    Strengths: very efficient to work with a big amount of data.
+	Weaknesses: if there are several changes regarding the size  
+	it may produce a big amount of rehashes and the process will be slower
+    TreeSet:
+	Strengths : Constant search time.  Faster than the linkedlist
+	Weaknesses : It takes more time to add new element, although there is not a big difference.
+    LinkedList
+	Strengths: very effucuent to add/insert values.
+	Weaknesses:  It takes O(n) to search for an element.
+
+*   Open hash set modeling is faster at adding, whereas closed hash set modeling is faster at searching (in regular
+	data)
+
+*   I expected HashSet to win all the competitions, but ClosedHashSet won some.
+
+* 	it was surprising because if the hash values are equal and we are talking about cases which take a lot of 
+	work.
+
+*  I did not try. I just read the formula at ex3 and the demonstration, since I trust the amazing OOP team (specially the 
+ones that check excercises), I would never try something different to what they say, it's like trying to sin if you
+are religious, or trying to go against the law if you are a good person (either religious or not, I respect everyone, 
+specially if you are an OOP checker).
+
+
